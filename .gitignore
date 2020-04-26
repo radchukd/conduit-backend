@@ -1,0 +1,5 @@
+.env
+node_modules
+dist
+test/__snapshots__
+test/coverage
