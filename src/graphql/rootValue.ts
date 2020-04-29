@@ -1,9 +1,11 @@
+import { articleResolvers } from './article';
+import { commentResolvers } from './comment';
+import { userResolvers } from './user';
+
 const rootValue = {
-  hello: (args: Record<string, string>, context: Record<string, string>) => {
-    console.log(args);
-    console.log(context);
-    return `Hello ${args.name}`;
-  },
+  ...articleResolvers,
+  ...commentResolvers,
+  ...userResolvers,
 };
 
 export default rootValue;

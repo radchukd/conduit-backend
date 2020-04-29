@@ -1,105 +1,31 @@
-# Graphql typescript starter
+# Conduit
+
+> Node (Express + GraphQL + MongoDB) codebase containing real world examples (CRUD, auth, advanced patterns, etc) that adheres to the [RealWorld](https://github.com/gothinkster/realworld-example-apps) API spec.
+
+This repo is functionality complete — PRs and issues welcome!
+
+This codebase was created to demonstrate a fully fledged fullstack application built with **Express and GraphQL** including CRUD operations, authentication, routing, pagination, and more.
+
+We've gone to great lengths to adhere to the **Express and GraphQL** community styleguides & best practices.
+
+For more information on how to this works with other frontends/backends, head over to the [RealWorld](https://github.com/gothinkster/realworld) repo.
 
 ## Getting started
 
-### Manual
+### Prerequisites
 
-```bash
-# Clone the repository
-git clone --depth=1 https://github.com/radchukd/stackx <project_name>
+* [Node.js](nodejs.org/)
+* [MongoDB](https://www.mongodb.com/)
 
-# Install dependencies
-cd <project_name> && npm install
+### Installation
 
-# Configure .env
-cp .env.example .env
+1. Clone the repo
+2. Configure .env
+3. Run `npm intall`
 
-# Build and run the project
-npm run build && npm run start
-```
+### Usage
 
-### Docker
+`npm run dev` to run the app in development mode
+`npm build && npm start` to compile typescript files and run the app in production mode
 
-```bash
-  # Build image
-  docker build -t <image_name> .
-
-  # Run image
-  docker run -p 5001:5001 <image_id>
-
-```
-
-## Available scripts
-
-In the project directory, you can run:
-
-### `npm run build`
-
-Compiles the app into esnext.
-
-### `npm run debug`
-
-Runs compiled app in debug mode
-
-### `npm run dev`
-
-Runs uncompiled app in development mode.
-
-### `npm run generate`
-
-Generates graphql types into src/types/generated.ts
-
-### `npm run lint`
-
-Lints src and test folders
-
-### `npm run test`
-
-Runs tests
-
-### `npm run start`
-
-Runs compiled app in production mode
-
-## What’s Included?
-
-- Eslint
-- Express
-- GraphQL(+ Code Generator)
-- Jest
-- MongoDB
-- Node.js(+ Nodemon)
-- Typescript
-
-## Project structure
-
-```
-├── dist/
-├── src
-│   ├── config
-│   │   ├── db.ts
-│   │   ├── graphqlServer.ts
-│   │   ├── index.ts
-│   │   └── secrets.ts
-│   ├── graphql
-│   │   ├── index.ts
-│   │   ├── rootValue.ts
-│   │   └── schema.ts
-│   ├── types
-│   │   └── index.ts
-│   ├── util
-│   │   └── index.ts
-│   └── index.ts
-├── test/
-├── codegen.json
-├── Dockerfile
-├── .dockerignore
-├── .env.example
-├── .eslintrc
-├── .gitignore
-├── jest.config.js
-├── package.json
-├── package-lock.json
-├── readme.md
-└── tsconfig.json
-```
+You can then navigate to <http://localhost:3001/graphql> and see graphQL schema
