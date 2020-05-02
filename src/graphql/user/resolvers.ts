@@ -56,7 +56,7 @@ const usersResolvers = {
     context: Context,
   ): Promise<ProfileType> => {
     const _id = context.payload ? context.payload._id : null;
-    const { username } = args;
+    const username = args.username.trim();
     const user: UserDocument = await db.users.findOne({ username });
     if (!user) { throw new Error('User not found.'); }
     return UD2PT(user, _id);
@@ -144,7 +144,7 @@ const usersResolvers = {
   ): Promise<ProfileType> => {
     if (!context.payload) { throw new Error('User is not logged in.'); }
     const { payload: { _id } } = context;
-    const { username } = args;
+    const username = args.username.trim();
     const user: UserDocument = await db.users.findOne({ username });
     if (!user) { throw new Error('User not found.'); }
     if (user._id.equals(_id)) { throw new Error('Cannot follow self.'); }
@@ -162,7 +162,7 @@ const usersResolvers = {
   ): Promise<ProfileType> => {
     if (!context.payload) { throw new Error('User is not logged in'); }
     const { payload: { _id } } = context;
-    const { username } = args;
+    const username = args.username.trim();
     const user: UserDocument = await db.users.findOne({ username });
     if (!user) { throw new Error('User not found.'); }
     if (user._id.equals(_id)) { throw new Error('Cannot unfollow self.'); }

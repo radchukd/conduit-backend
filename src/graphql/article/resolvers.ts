@@ -80,7 +80,7 @@ const articleResolvers = {
     context: Context,
   ): Promise<ArticleType> => {
     const _id = context.payload ? context.payload._id : null;
-    const { slug } = args;
+    const slug = args.slug.trim();
     const article: ArticleDocument = await db.articles.findOne({ slug });
     if (!article) { throw new Error('Article not found.'); }
     const author: UserDocument = await db.users.findOne({ _id: article.authorId });
@@ -128,7 +128,7 @@ const articleResolvers = {
   ): Promise<ArticleType> => {
     if (!context.payload) { throw new Error('User is not logged in.'); }
     const { payload: { _id } } = context;
-    const { slug } = args;
+    const slug = args.slug.trim();
     const article: ArticleDocument = await db.articles.findOne({ slug });
     if (!article) { throw new Error('Article not found.'); }
     if (article.favorited.includes(_id)) { throw new Error('Article is already favurited.'); }
@@ -147,7 +147,7 @@ const articleResolvers = {
   ): Promise<ArticleType> => {
     if (!context.payload) { throw new Error('User is not logged in.'); }
     const { payload: { _id } } = context;
-    const { slug } = args;
+    const slug = args.slug.trim();
     const article: ArticleDocument = await db.articles.findOne({ slug });
     if (!article) { throw new Error('Article not found.'); }
     if (!article.favorited.includes(_id)) { throw new Error('Article is not favorited.'); }
@@ -199,7 +199,7 @@ const articleResolvers = {
   ): Promise<boolean> => {
     if (!context.payload) { throw new Error('User is not logged in.'); }
     const { payload: { _id } } = context;
-    const { slug } = args;
+    const slug = args.slug.trim();
     const article: ArticleDocument = await db.articles.findOne({ slug });
     if (!article) { throw new Error('Article not found.'); }
     if (!article.authorId.equals(_id)) { throw new Error('User is not author.'); }

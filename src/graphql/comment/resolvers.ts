@@ -20,7 +20,7 @@ const commentResolvers = {
     context: Context,
   ): Promise<CommentType[]> => {
     const _id = context.payload ? context.payload._id : null;
-    const { slug } = args;
+    const slug = args.slug.trim();
     const comments: CommentDocument[] = await db.comments.find({ slug }).toArray();
     return Promise.all(comments.map(async (comment: CommentDocument) => {
       const author: UserDocument = await db.users.findOne({ _id: comment.authorId });
@@ -61,7 +61,7 @@ const commentResolvers = {
   ): Promise<boolean> => {
     if (!context.payload) { throw new Error('User is not logged in.'); }
     const authorId = context.payload._id;
-    const { _id } = args;
+    const _id = args._id.trim();
     const comment: CommentDocument = await db.comments.findOne({ _id: new ObjectId(_id) });
     if (!comment) { throw new Error('Comment not found.'); }
     if (!comment.authorId.equals(authorId)) { throw new Error('User is not author.'); }
