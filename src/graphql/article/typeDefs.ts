@@ -1,4 +1,7 @@
-const articleSchema = `
+import gql from 'graphql-tag';
+import { DocumentNode } from 'graphql';
+
+const articleTypeDefs: DocumentNode = gql`
   enum Tag {
     programming
     cooking
@@ -48,7 +51,6 @@ const articleSchema = `
     description: String
     body: String
   }
-  
 `;
 
-export default articleSchema;
+export default articleTypeDefs;

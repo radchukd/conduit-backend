@@ -9,9 +9,8 @@ import {
   PORT,
   NODE_ENV,
   wwwRedirect,
-  graphqlServer,
+  apolloServer,
   httpsRedirect,
-  contextMiddleware,
 } from './config';
 
 const app = express();
@@ -21,7 +20,6 @@ app.use(helmet());
 app.use(helmet.permittedCrossDomainPolicies());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use('/graphql', contextMiddleware, graphqlServer);
 
 if (NODE_ENV === 'production') {
   app.use('/*', httpsRedirect());
@@ -29,6 +27,7 @@ if (NODE_ENV === 'production') {
   app.use(rateLimit({ windowMs: 15 * 60 * 1000, max: 100 }));
 }
 
+apolloServer.applyMiddleware({ app, path: '/graphql' });
 app.listen(PORT, async () => { await db.init(); });
 
 export default app;

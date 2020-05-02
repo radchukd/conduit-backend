@@ -1,2 +1,2 @@
 export { default as articleResolvers } from './resolvers';
-export { default as articleSchema } from './schema';
+export { default as articleTypeDefs } from './typeDefs';

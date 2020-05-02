@@ -1,9 +1,10 @@
-import { GraphQLSchema, buildSchema } from 'graphql';
-import { articleSchema } from './article';
-import { commentSchema } from './comment';
-import { userSchema } from './user';
+import gql from 'graphql-tag';
+import { DocumentNode } from 'graphql';
+import { articleTypeDefs } from './article';
+import { commentTypeDefs } from './comment';
+import { userTypeDefs } from './user';
 
-const schema: GraphQLSchema = buildSchema(`
+const queryTypeDefs: DocumentNode = gql`
   type Query {
     login(input: LoginInput!): UserType!
     user: UserType!
@@ -14,7 +15,9 @@ const schema: GraphQLSchema = buildSchema(`
     comments(slug: String!): [CommentType]!
     tags: [Tag]!
   }
+`;
 
+const mutationTypeDefs: DocumentNode = gql`
   type Mutation {
     signup(input: SignupInput!): UserType!
     updateUser(input: UpdateUserInput!): UserType!
@@ -28,10 +31,14 @@ const schema: GraphQLSchema = buildSchema(`
     createComment(input: CreateCommentInput!): CommentType!
     deleteComment(_id: ID!): Boolean
   }
+`;
 
-  ${articleSchema}
-  ${commentSchema}
-  ${userSchema}
-`);
+const typeDefs: DocumentNode[] = [
+  queryTypeDefs,
+  mutationTypeDefs,
+  articleTypeDefs,
+  commentTypeDefs,
+  userTypeDefs,
+];
 
-export default schema;
+export default typeDefs;

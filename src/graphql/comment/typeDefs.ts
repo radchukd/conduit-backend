@@ -1,4 +1,7 @@
-const commentSchema = `
+import gql from 'graphql-tag';
+import { DocumentNode } from 'graphql';
+
+const commentTypeDefs: DocumentNode = gql`
   type CommentType {
     _id: ID!
     body: String!
@@ -11,7 +14,6 @@ const commentSchema = `
     slug: String!
     body: String!
   }
-
 `;
 
-export default commentSchema;
+export default commentTypeDefs;

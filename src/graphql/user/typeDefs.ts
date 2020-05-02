@@ -1,4 +1,7 @@
-const userSchema = `
+import gql from 'graphql-tag';
+import { DocumentNode } from 'graphql';
+
+const userTypeDefs: DocumentNode = gql`
   type UserType {
     _id: ID!
     email: String!
@@ -35,7 +38,6 @@ const userSchema = `
     bio: String
     image: String
   }
-
 `;
-// change image to some type or what
-export default userSchema;
+
+export default userTypeDefs;
